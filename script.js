@@ -1,17 +1,52 @@
-let firstCard =10; //Math.floor(Math.random()*(10)) + 2;
-let secondCard = 11; //Math.floor(Math.random()*(10)) + 2;
-let sum = firstCard + secondCard;
+let cards = [];
+let sum = 0;
 let hasBlackJack = false;
-let isAlive = true;
+let isAlive = false;
 let message = '';
 
+let player = {
+    name :"Olivia",
+    chips : 200,
+    
+}
+
 const startBtn = document.getElementById('start');
+const newCardBtn = document.getElementById('draw');
+
 let messageEl = document.getElementById('message-el');
+let sumEl = document.getElementById('sum-el');
+let cardsEl = document.getElementById('cards-el');
+let playerEl = document.getElementById('player-el');
+
+playerEl.textContent = `${player.name}: $${player.chips}`
 
 startBtn.addEventListener('click',startGame);
+newCardBtn.addEventListener('click',newCard);
+
+function getRandomCard(){
+    let num = Math.floor(Math.random()*(13)) + 1;
+    if(num > 10){
+        return 10;
+    }else if( num === 1){
+        return 11;
+    }else{
+        return num;
+    }
+}
 
 function startGame(){
-    if(sum < 20){
+    isAlive = true;
+    let firstCard = getRandomCard();
+    let secondCard = getRandomCard();
+    cards = [firstCard, secondCard];
+    sum = firstCard + secondCard;
+    renderGame();
+}
+
+
+function renderGame(){
+    
+    if(sum <= 20){
         message = 'Do you want to draw a new card?';
     } else if(sum === 21){
         message ="You've got BlackJack!";
@@ -19,8 +54,26 @@ function startGame(){
     }else{
         message = "You're out of the game!";
         isAlive = false;
+        
     }
+
+    cardsEl.textContent = `Cards: `;
+    for(let i = 0; i < cards.length; i++){
+        cardsEl.textContent += cards[i] + " " ;  
+    }
+
+    sumEl.textContent = 'Sum: '+ sum;
     messageEl.textContent = message;
+
+}
+
+function newCard(){
+    if(isAlive == true && sum < 21){
+        let card = getRandomCard();
+        cards.push(card);
+        sum += card;
+        renderGame();
+    }
 }
 
 

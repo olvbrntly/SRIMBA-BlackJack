@@ -15,7 +15,15 @@ h1{
  font-style: italic;
 }
 
-#start{
+#btns{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center; 
+    align-items: center;  
+}
+
+button{
     color:#016f32;
     width:150px;
     background-color:goldenrod;
