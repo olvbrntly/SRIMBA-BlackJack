@@ -1,6 +1,6 @@
 # SRIMBA-BlackJack
 
-A project form the SCRIMBA Learn Javascript for Free Course:
+A project from the SCRIMBA Learn Javascript for Free Course:
 
 This project used:
 - arrays
